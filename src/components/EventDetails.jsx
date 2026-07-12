@@ -84,7 +84,7 @@ export default function EventDetails() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold font-serif text-brand-text mb-2">Scratch to Reveal Details</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-[#d4af37] mb-2">Scratch to Reveal Details</h2>
             <p className="text-brand-text/60 font-serif text-sm">Gently scratch the cards below to reveal the date, time, and venue!</p>
           </motion.div>
 
@@ -106,7 +106,7 @@ export default function EventDetails() {
                     <div className="mb-4 p-4 rounded-full bg-[#fdfbf7] border border-brand-primary/10 shadow-sm">
                       {item.icon}
                     </div>
-                    <h3 className="text-sm text-brand-text/50 font-serif font-bold mb-1 uppercase tracking-widest">{item.title}</h3>
+                    <h3 className="text-sm text-brand-text/50 font-display font-bold mb-1 uppercase tracking-widest">{item.title}</h3>
                     <p className="text-lg md:text-xl font-bold text-brand-text font-serif tracking-wide">{item.value}</p>
                   </div>
                 </ScratchCard>
@@ -124,7 +124,7 @@ export default function EventDetails() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold font-serif text-brand-text mb-2">Ceremony Schedule</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-[#d4af37] mb-2">Pre-Wedding Events</h2>
             <div className="w-24 h-0.5 bg-brand-primary/70 mx-auto rounded-full mt-4"></div>
           </motion.div>
 
@@ -146,7 +146,7 @@ export default function EventDetails() {
                   <div className="w-12 h-12 rounded-xl bg-white/80 border border-brand-primary/10 flex items-center justify-center shadow-sm">
                     {cerm.icon}
                   </div>
-                  <h3 className="text-xl font-serif font-bold text-brand-text">{cerm.name}</h3>
+                  <h3 className="text-xl font-display font-bold text-brand-text">{cerm.name}</h3>
                   <div className="flex flex-col space-y-1 text-sm text-brand-text/70">
                     <p className="font-semibold">{cerm.time}</p>
                     <p className="italic">{cerm.venue}</p>
@@ -167,7 +167,7 @@ export default function EventDetails() {
           className="w-full flex flex-col items-center space-y-8"
         >
           <div className="text-center">
-            <h2 className="text-2xl md:text-3xl font-bold font-serif text-brand-text mb-2">Find the Venue</h2>
+            <h2 className="text-2xl md:text-3xl font-bold font-display text-[#d4af37] mb-2">Find the Venue</h2>
             <div className="w-16 h-0.5 bg-brand-secondary/70 mx-auto rounded-full mt-3"></div>
           </div>
           
@@ -190,7 +190,7 @@ export default function EventDetails() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-6 mb-4 px-8 py-3 rounded-full bg-brand-primary hover:bg-brand-primary/95 text-white font-serif font-bold text-sm tracking-wider shadow-[0_4px_15px_rgba(217,116,134,0.15)] hover:shadow-[0_4px_25px_rgba(217,116,134,0.3)] transition-all duration-300 flex items-center space-x-2 cursor-pointer"
+              className="mt-6 mb-4 px-8 py-3 rounded-full bg-brand-primary hover:bg-brand-primary/95 text-white font-display font-bold text-sm tracking-wider shadow-[0_4px_15px_rgba(217,116,134,0.15)] hover:shadow-[0_4px_25px_rgba(217,116,134,0.3)] transition-all duration-300 flex items-center space-x-2 cursor-pointer"
             >
               <span>View on Google Maps</span>
               <span>📍</span>
@@ -207,7 +207,7 @@ export default function EventDetails() {
           className="w-full text-center py-6 flex flex-col items-center space-y-4"
         >
           <div className="text-3xl text-brand-primary">🎁</div>
-          <h2 className="text-2xl md:text-3xl font-bold font-serif text-brand-text">A Note on Gifts</h2>
+          <h2 className="text-2xl md:text-3xl font-bold font-display text-[#d4af37]">A Note on Gifts</h2>
           <p className="text-lg md:text-xl font-serif italic text-brand-text/80 max-w-xl px-4 leading-relaxed">
             "Your presence, blessings and good wishes are the most precious gifts for us. We do not need anything else. However, should you still wish to grace us with a token, we would be honoured."
           </p>

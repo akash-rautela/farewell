@@ -6,6 +6,10 @@
   --color-brand-secondary: #d4af37; /* Luxury Gold */
   --color-brand-accent: #c5a880; /* Elegant Champagne / Bronze */
   --color-brand-text: #3c2f2f; /* Deep Espresso / Charcoal */
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "EB Garamond", Georgia, serif;
+  --font-script: "Alex Brush", cursive;
 }
 
 @layer base {
@@ -17,12 +21,7 @@
   
   body {
     @apply bg-brand-bg text-brand-text min-h-screen;
-    font-family: 'Montserrat', system-ui, sans-serif;
-  }
-
-  /* Serif font for elegant wedding look */
-  .font-serif {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-serif);
   }
 
   ::-webkit-scrollbar {

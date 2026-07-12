@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaMusic } from 'react-icons/fa';
 import PhaseEnvelope from './components/PhaseEnvelope';
 import PhaseLetter from './components/PhaseLetter';
 import PhaseHero from './components/PhaseHero';
@@ -12,15 +12,48 @@ import Footer from './components/Footer';
 export default function App() {
   const [phase, setPhase] = useState("envelope"); // 'envelope', 'letter', 'hero', 'main'
   const audioRef = useRef(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
-  // Reusable function to initialize audio safely upon first click interaction
+  // Pre-instantiate the Audio object on mount so it preloads and is ready for synchronous user interaction
+  useEffect(() => {
+    const audio = new Audio("/experience.mp3");
+    audio.loop = true;
+    audio.volume = 0.35;
+
+    // Unify play state by binding to native audio events
+    audio.addEventListener('play', () => setIsAudioPlaying(true));
+    audio.addEventListener('pause', () => setIsAudioPlaying(false));
+
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+    };
+  }, []);
+
   const tryStartAudio = () => {
-    if (!audioRef.current) {
-      // Elegant romantic background music
-      audioRef.current = new Audio("https://assets.mixkit.co/music/preview/mixkit-love-story-1159.mp3");
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.3;
-      audioRef.current.play().catch(e => console.log("Audio play blocked natively:", e));
+    if (audioRef.current && audioRef.current.paused) {
+      audioRef.current.play().catch(e => {
+        console.log("Audio play blocked natively, waiting for user gesture:", e);
+        setIsAudioPlaying(false);
+      });
+    }
+  };
+
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play()
+        .then(() => setIsAudioPlaying(true))
+        .catch(e => {
+          console.log("Playback prevented:", e);
+          setIsAudioPlaying(false);
+        });
+    } else {
+      audio.pause();
+      setIsAudioPlaying(false);
     }
   };
 
@@ -41,6 +74,34 @@ export default function App() {
   return (
     <div className="relative w-full text-brand-text bg-brand-bg min-h-screen overflow-x-hidden flex flex-col items-center">
       
+      {/* Floating Small Audio Toggle in Top Right */}
+      {phase !== "envelope" && audioRef.current && (
+        <motion.button
+          onClick={toggleAudio}
+          className="fixed top-4 right-4 z-50 flex items-center justify-center w-8 h-8 rounded-full bg-white/70 border border-brand-primary/10 text-brand-primary backdrop-blur-md shadow-sm hover:scale-105 active:scale-95 transition cursor-pointer"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          title={isAudioPlaying ? "Pause Music" : "Play Music"}
+        >
+          {isAudioPlaying ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+              className="flex items-center justify-center"
+            >
+              <FaMusic size={11} />
+            </motion.div>
+          ) : (
+            <div className="relative flex items-center justify-center">
+              <FaMusic size={11} className="opacity-40" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-4 h-[1.5px] bg-brand-primary rotate-45"></div>
+              </div>
+            </div>
+          )}
+        </motion.button>
+      )}
+
       {phase === "envelope" && (
         <PhaseEnvelope onOpen={handleEnvelopeClick} />
       )}

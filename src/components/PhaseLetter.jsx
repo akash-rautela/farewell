@@ -97,7 +97,7 @@ export default function PhaseLetter({ onProceed }) {
                 let style = "text-lg md:text-xl leading-[2.2] text-[#4e342e] w-full relative z-10 font-serif";
 
                 if (item.type === "heading") {
-                  style = "text-3xl md:text-5xl font-bold text-[#3e2723] mt-8 mb-4 border-b border-[#3e2723]/20 pb-4 w-full relative z-10 font-serif";
+                  style = "text-3xl md:text-5xl font-bold text-[#3e2723] font-display mt-8 mb-4 border-b border-[#3e2723]/20 pb-4 w-full relative z-10";
                 }
 
                 if (item.type === "highlight") {
@@ -108,7 +108,7 @@ export default function PhaseLetter({ onProceed }) {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, root: scrollRef, margin: "100px" }}
                       transition={{ duration: 1 }}
-                      className="w-full border-l-4 border-[#d4af37] bg-[#faf6f0] px-6 py-5 shadow-inner text-xl italic my-6 relative z-10 text-brand-primary"
+                      className="w-full border-l-4 border-[#d4af37] bg-[#faf6f0] px-6 py-5 shadow-inner text-xl italic my-6 relative z-10 text-brand-primary font-serif"
                     >
                       {item.text}
                     </motion.div>
@@ -124,13 +124,16 @@ export default function PhaseLetter({ onProceed }) {
                     transition={{ duration: 1 }}
                     className={style}
                   >
+                    {idx === 0 && (
+                      <span className="block font-script text-3xl md:text-4xl text-brand-primary mb-2 capitalize">Together with their families</span>
+                    )}
                     {item.text}
                   </motion.div>
                 );
               })}
 
               <motion.p 
-                className="italic text-lg mt-10 opacity-80"
+                className="italic text-lg mt-10 opacity-80 font-serif"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, root: scrollRef }}
@@ -149,7 +152,7 @@ export default function PhaseLetter({ onProceed }) {
               >
                 <button 
                   onClick={onProceed}
-                  className="w-36 h-36 rounded-full bg-gradient-to-br from-[#f3e5ab] via-[#d4af37] to-[#a67c1e] text-[#faf6f0] flex flex-col items-center justify-center font-serif shadow-[0_15px_30px_rgba(212,175,55,0.4),inset_0_3px_8px_rgba(255,255,255,0.4),inset_0_-5px_10px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition border border-[#d4af37]/40 cursor-pointer"
+                  className="w-36 h-36 rounded-full bg-gradient-to-br from-[#f3e5ab] via-[#d4af37] to-[#a67c1e] text-[#faf6f0] flex flex-col items-center justify-center font-display shadow-[0_15px_30px_rgba(212,175,55,0.4),inset_0_3px_8px_rgba(255,255,255,0.4),inset_0_-5px_10px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-95 transition border border-[#d4af37]/40 cursor-pointer"
                 >
                   <span className="text-xs uppercase tracking-widest opacity-80">Enter</span>
                   <span className="text-lg font-bold tracking-wider text-white">Celebration</span>

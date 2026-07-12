@@ -42,7 +42,7 @@ export default function CountdownTimer() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="text-2xl md:text-3xl font-serif font-bold text-brand-primary tracking-wide">
+        <span className="text-2xl md:text-3xl font-display font-bold text-brand-primary tracking-wide">
           Today is the Special Day! 💍🎉
         </span>
       </motion.div>
@@ -58,7 +58,7 @@ export default function CountdownTimer() {
 
   return (
     <div className="flex flex-col items-center space-y-4 max-w-xl mx-auto w-full">
-      <p className="text-brand-text/60 font-serif text-sm tracking-wider uppercase">Countdown to Forever</p>
+      <p className="text-brand-primary font-script text-3xl md:text-4xl normal-case tracking-normal mb-1">Countdown to Forever</p>
       
       <div className="grid grid-cols-4 gap-3 sm:gap-4 md:gap-6 w-full">
         {items.map((item, idx) => (
@@ -69,10 +69,10 @@ export default function CountdownTimer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <span className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-brand-primary">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-brand-primary">
               {String(item.value).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-xs text-brand-text/50 font-serif uppercase tracking-widest mt-1">
+            <span className="text-[10px] sm:text-xs text-brand-text/50 font-display uppercase tracking-widest mt-1">
               {item.label}
             </span>
           </motion.div>

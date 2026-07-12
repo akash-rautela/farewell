@@ -52,7 +52,7 @@ export default function MemoryLane() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4 text-brand-text">Our Story</h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4 text-[#d4af37]">Our Story</h2>
           <div className="w-32 h-0.5 bg-gradient-to-r from-brand-primary to-brand-secondary mx-auto rounded-full"></div>
           <p className="mt-4 text-brand-text/75 font-serif max-w-xl mx-auto text-base md:text-lg">
             A journey of love, friendship, and beautiful moments that led us to this special day.
@@ -98,7 +98,7 @@ export default function MemoryLane() {
                   {isActive && (
                     <div className="absolute bottom-0 left-0 w-full p-8 md:p-12">
                       <motion.h3 
-                        className="text-2xl md:text-3xl font-extrabold text-brand-secondary mb-3 drop-shadow-md font-serif tracking-wide"
+                        className="text-2xl md:text-3xl font-extrabold text-[#d4af37] mb-3 drop-shadow-md font-display tracking-wide"
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2 }}

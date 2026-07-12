@@ -38,7 +38,7 @@ export default function ScratchCard({ children }) {
     
     // Choose appropriate size based on dimensions
     const fontSize = width < 250 ? '14px' : '16px';
-    ctx.font = `bold ${fontSize} 'Playfair Display', Georgia, serif`;
+    ctx.font = `bold ${fontSize} 'Cormorant Garamond', Georgia, serif`;
     
     // Add text shadow
     ctx.shadowColor = 'rgba(60, 47, 47, 0.3)';

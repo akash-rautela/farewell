@@ -24,14 +24,17 @@ export default function PhaseEnvelope({ onOpen }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <motion.h2 
-          className="text-2xl sm:text-3xl font-serif font-bold text-brand-primary tracking-widest uppercase mb-16 drop-shadow-sm text-center px-4"
+        <motion.div
+          className="flex flex-col items-center mb-16 text-center px-4"
           initial={{ opacity: 0, filter: "blur(5px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 2, delay: 0.5 }}
         >
-          A Promise of Forever
-        </motion.h2>
+          <span className="font-script text-3xl md:text-4xl text-brand-primary mb-2">Together with their families</span>
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#d4af37] tracking-widest uppercase drop-shadow-sm">
+            A Promise of Forever
+          </h2>
+        </motion.div>
 
         <motion.div 
           className="relative cursor-pointer group"
@@ -83,8 +86,8 @@ export default function PhaseEnvelope({ onOpen }) {
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             >
               <div className="absolute inset-1.5 sm:inset-2 rounded-full border border-[#faf6f0]/40 blur-[0.5px]"></div>
-              <span className="text-[10px] sm:text-xs font-serif uppercase tracking-widest opacity-80 mb-0.5">Open</span>
-              <span className="text-base sm:text-lg font-bold font-serif tracking-wider shadow-sm text-white">A & R</span>
+              <span className="text-[10px] sm:text-xs font-display uppercase tracking-widest opacity-80 mb-0.5">Open</span>
+              <span className="text-base sm:text-lg font-bold font-display tracking-wider shadow-sm text-white">A & R</span>
             </motion.div>
 
           </div>

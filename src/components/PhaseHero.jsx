@@ -110,8 +110,18 @@ export default function PhaseHero({ onClick, isInteractive }) {
         animate={{ x: mousePos.x, y: mousePos.y }}
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
       >
+        {/* Accent Script Line */}
+        <motion.span
+          className="font-script text-3xl sm:text-4xl text-brand-primary mb-2 text-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          Together with their families
+        </motion.span>
+
         <motion.h1 
-          className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-4 text-center text-brand-text drop-shadow-[0_2px_15px_rgba(217,116,134,0.15)] font-serif"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight mb-4 text-center text-[#d4af37] drop-shadow-[0_2px_15px_rgba(217,116,134,0.15)] font-display"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -120,7 +130,7 @@ export default function PhaseHero({ onClick, isInteractive }) {
         </motion.h1>
         
         <motion.h2 
-          className="text-xl sm:text-2xl md:text-3xl text-brand-secondary font-bold font-serif tracking-[0.2em] uppercase text-center drop-shadow-sm"
+          className="text-xl sm:text-2xl md:text-3xl text-[#3c2f2f] font-semibold font-serif tracking-[0.2em] uppercase text-center drop-shadow-sm mt-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
@@ -129,7 +139,7 @@ export default function PhaseHero({ onClick, isInteractive }) {
         </motion.h2>
 
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl text-brand-accent font-medium tracking-[0.1em] mt-4 font-serif text-center drop-shadow-sm"
+          className="text-lg sm:text-xl md:text-2xl text-[#3c2f2f]/80 font-medium tracking-[0.1em] mt-4 font-serif text-center drop-shadow-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
@@ -146,7 +156,7 @@ export default function PhaseHero({ onClick, isInteractive }) {
           transition={{ delay: 2, duration: 1 }}
         >
           <motion.div 
-            className="px-8 sm:px-10 py-4 rounded-full bg-white/80 backdrop-blur-md border border-brand-primary/20 text-brand-primary font-bold tracking-[0.15em] uppercase text-sm sm:text-base shadow-[0_10px_25px_rgba(217,116,134,0.1)]"
+            className="px-8 sm:px-10 py-4 rounded-full bg-white/80 backdrop-blur-md border border-brand-primary/20 text-brand-primary font-bold tracking-[0.15em] uppercase text-sm sm:text-base font-display shadow-[0_10px_25px_rgba(217,116,134,0.1)]"
             animate={{ scale: [1, 1.04, 1], boxShadow: ["0 10px 20px rgba(217,116,134,0.05)", "0 10px 25px rgba(212,175,55,0.2)", "0 10px 20px rgba(217,116,134,0.05)"] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >

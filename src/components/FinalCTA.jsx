@@ -37,11 +37,24 @@ export default function FinalCTA() {
     e.preventDefault();
     if (!formData.name.trim()) return;
 
+    // Trigger celebratory success state and confetti
     setSubmitted(true);
     setShowConfetti(true);
     setTimeout(() => {
       setShowConfetti(false);
     }, 8000);
+
+    // Format details for the WhatsApp RSVP message
+    const phoneNumber = "919999999999"; // Aditya & Riya's contact number
+    const attendanceText = formData.attending === 'yes' ? 'Attending with joy 🌸' : 'Respectfully declining 🕊️';
+    const guestsText = formData.attending === 'yes' ? `${formData.guests} Guest(s)` : 'N/A';
+    const messageText = formData.message.trim() ? formData.message.trim() : 'Sending warm blessings!';
+
+    const rsvpMessage = `💍 *Wedding RSVP Confirmation* 💍\n\n*Name:* ${formData.name}\n*Attendance:* ${attendanceText}\n*Guests:* ${guestsText}\n*Wishes/Message:* ${messageText}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(rsvpMessage)}`;
+
+    // Open WhatsApp Web/App in a new tab to send the message
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -66,11 +79,11 @@ export default function FinalCTA() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-xl"
       >
-        <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 text-brand-text">
-          RSVP to Our Special Day
+        <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 text-[#d4af37]">
+          Kindly Confirm Your Presence
         </h2>
         <p className="text-brand-text/70 font-serif text-sm md:text-base mb-8">
-          Please respond by December 1st, 2026. We look forward to celebrating with you!
+          We would love to have you with us as we begin our new journey together.
         </p>
 
         {!submitted ? (
@@ -80,7 +93,7 @@ export default function FinalCTA() {
           >
             {/* Name Input */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="name" className="text-brand-text/80 font-serif font-bold text-sm">Your Name</label>
+              <label htmlFor="name" className="text-brand-text/80 font-display font-bold text-sm">Your Name</label>
               <input
                 type="text"
                 id="name"
@@ -95,7 +108,7 @@ export default function FinalCTA() {
 
             {/* Attendance Radio */}
             <div className="flex flex-col space-y-2">
-              <label className="text-brand-text/80 font-serif font-bold text-sm">Will you attend?</label>
+              <label className="text-brand-text/80 font-display font-bold text-sm">Will you attend?</label>
               <div className="flex space-x-6">
                 <label className="flex items-center space-x-2 font-serif text-sm text-brand-text/80 cursor-pointer">
                   <input
@@ -125,7 +138,7 @@ export default function FinalCTA() {
             {/* Guests Selector */}
             {formData.attending === 'yes' && (
               <div className="flex flex-col space-y-2 animate-fade-in">
-                <label htmlFor="guests" className="text-brand-text/80 font-serif font-bold text-sm">Number of Guests</label>
+                <label htmlFor="guests" className="text-brand-text/80 font-display font-bold text-sm">Number of Guests</label>
                 <select
                   id="guests"
                   name="guests"
@@ -143,7 +156,7 @@ export default function FinalCTA() {
 
             {/* Message Input */}
             <div className="flex flex-col space-y-2">
-              <label htmlFor="message" className="text-brand-text/80 font-serif font-bold text-sm">Message for Aditya & Riya</label>
+              <label htmlFor="message" className="text-brand-text/80 font-display font-bold text-sm">Message for Aditya & Riya</label>
               <textarea
                 id="message"
                 name="message"
@@ -160,9 +173,9 @@ export default function FinalCTA() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full py-4 rounded-xl bg-brand-primary hover:bg-brand-primary/95 text-white font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-[0_4px_15px_rgba(217,116,134,0.2)] hover:shadow-[0_4px_25px_rgba(217,116,134,0.4)] cursor-pointer"
+              className="w-full py-4 rounded-xl bg-brand-primary hover:bg-brand-primary/95 text-white font-display font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-[0_4px_15px_rgba(217,116,134,0.2)] hover:shadow-[0_4px_25px_rgba(217,116,134,0.4)] cursor-pointer"
             >
-              Submit RSVP 💌
+              Confirm Attendance 💌
             </motion.button>
           </form>
         ) : (
@@ -172,7 +185,7 @@ export default function FinalCTA() {
             className="glass-card rounded-[2rem] p-12 text-center border border-brand-primary/10 flex flex-col items-center justify-center space-y-6"
           >
             <div className="text-5xl">❤️</div>
-            <h3 className="text-2xl font-serif font-bold text-brand-text">Thank You, {formData.name}!</h3>
+            <h3 className="text-2xl font-display font-bold text-[#d4af37]">Thank You, {formData.name}!</h3>
             <p className="text-brand-text/80 font-serif max-w-md mx-auto text-sm md:text-base leading-relaxed">
               {formData.attending === 'yes' 
                 ? `We are absolutely thrilled to celebrate with you and your guests! See you on November 9th.`
@@ -181,9 +194,9 @@ export default function FinalCTA() {
             </p>
             <motion.button
               onClick={() => setSubmitted(false)}
-              className="text-xs uppercase tracking-wider font-bold text-brand-primary/80 hover:text-brand-primary transition-colors underline cursor-pointer"
+              className="text-xs uppercase tracking-wider font-display font-bold text-brand-primary/80 hover:text-brand-primary transition-colors underline cursor-pointer"
             >
-              Update RSVP Response
+              Update Attendance Response
             </motion.button>
           </motion.div>
         )}
@@ -197,7 +210,7 @@ export default function FinalCTA() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <span className="text-brand-primary text-xl">✨🌸✨</span>
-          <h3 className="text-2xl md:text-3xl font-serif font-bold text-brand-text">
+          <h3 className="text-4xl sm:text-5xl font-script text-brand-primary">
             We can't wait to celebrate with you!
           </h3>
           <p className="text-sm md:text-base text-brand-text/70 leading-relaxed font-serif">
