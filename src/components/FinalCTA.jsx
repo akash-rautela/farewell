@@ -58,7 +58,7 @@ export default function FinalCTA() {
   };
 
   return (
-    <section className="relative w-full py-32 flex items-center justify-center flex-col text-center z-20 bg-brand-bg px-4">
+    <section className="relative w-full py-32 flex items-center justify-center flex-col text-center z-10 bg-transparent px-4">
       {showConfetti && (
         <div className="fixed inset-0 z-50 pointer-events-none">
           <Confetti 

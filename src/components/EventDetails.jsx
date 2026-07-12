@@ -61,7 +61,7 @@ export default function EventDetails() {
   ];
 
   return (
-    <section className="relative w-full py-20 z-20 bg-brand-bg px-6">
+    <section className="relative w-full py-20 z-20 bg-gradient-to-b from-[#faf0f2] via-[#faf6f0] to-[#faf7f2] px-6">
       <div className="max-w-6xl mx-auto w-full flex flex-col space-y-24">
         
         {/* Countdown Timer Wrapper */}
@@ -76,14 +76,15 @@ export default function EventDetails() {
         </motion.div>
 
         {/* Scratch Cards Section (Core Details) */}
-        <div className="flex flex-col items-center space-y-12">
+        <div className="flex flex-col items-center space-y-16 md:space-y-24">
           <motion.div 
-            className="text-center"
+            className="text-center flex flex-col items-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            <div className="text-[#d4af37] text-2xl mb-2 select-none animate-pulse">❀</div>
             <h2 className="text-3xl md:text-4xl font-bold font-display text-[#d4af37] mb-2">Scratch to Reveal Details</h2>
             <p className="text-brand-text/60 font-serif text-sm">Gently scratch the cards below to reveal the date, time, and venue!</p>
           </motion.div>
@@ -99,10 +100,12 @@ export default function EventDetails() {
               <motion.div 
                 key={idx}
                 variants={cardVars}
-                className="glass-card rounded-[2rem] overflow-hidden flex flex-col items-center justify-center p-2 min-h-[220px]"
+                whileHover={{ scale: 1.02, y: -4 }}
+                className="luxury-card rounded-[2rem] flex flex-col items-center justify-center p-2 min-h-[220px] transition-all duration-300"
               >
+                <div className="card-shimmer" />
                 <ScratchCard>
-                  <div className="flex flex-col items-center justify-center text-center p-8 w-full h-full min-h-[200px]">
+                  <div className="flex flex-col items-center justify-center text-center p-8 w-full h-full min-h-[200px] relative z-10">
                     <div className="mb-4 p-4 rounded-full bg-[#fdfbf7] border border-brand-primary/10 shadow-sm">
                       {item.icon}
                     </div>
@@ -116,14 +119,15 @@ export default function EventDetails() {
         </div>
 
         {/* Ceremonies Schedule Section */}
-        <div className="flex flex-col items-center space-y-12">
+        <div className="flex flex-col items-center space-y-16 md:space-y-24">
           <motion.div 
-            className="text-center"
+            className="text-center flex flex-col items-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
+            <div className="text-[#d4af37] text-2xl mb-2 select-none animate-pulse">✦</div>
             <h2 className="text-3xl md:text-4xl font-bold font-display text-[#d4af37] mb-2">Pre-Wedding Events</h2>
             <div className="w-24 h-0.5 bg-brand-primary/70 mx-auto rounded-full mt-4"></div>
           </motion.div>
@@ -140,9 +144,10 @@ export default function EventDetails() {
                 key={idx}
                 variants={cardVars}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="glass-card rounded-[2rem] p-8 flex flex-col justify-between text-left transition-all duration-300 border border-brand-primary/10"
+                className="luxury-card rounded-[2rem] p-8 flex flex-col justify-between text-left transition-all duration-300"
               >
-                <div className="flex flex-col space-y-4">
+                <div className="card-shimmer" />
+                <div className="flex flex-col space-y-4 relative z-10">
                   <div className="w-12 h-12 rounded-xl bg-white/80 border border-brand-primary/10 flex items-center justify-center shadow-sm">
                     {cerm.icon}
                   </div>

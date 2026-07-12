@@ -43,7 +43,7 @@ export default function MemoryLane() {
   }, [memories.length]);
 
   return (
-    <section className="relative w-full py-32 bg-brand-bg z-20 overflow-hidden flex flex-col items-center">
+    <section className="relative w-full py-32 bg-gradient-to-b from-brand-bg to-[#faf0f2] z-20 overflow-hidden flex flex-col items-center">
       <div className="max-w-6xl mx-auto px-6 w-full flex flex-col items-center">
         
         <motion.div 

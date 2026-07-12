@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { FaWhatsapp, FaMusic } from 'react-icons/fa';
 import PhaseEnvelope from './components/PhaseEnvelope';
 import PhaseLetter from './components/PhaseLetter';
@@ -8,11 +8,25 @@ import EventDetails from './components/EventDetails';
 import MemoryLane from './components/MemoryLane';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import FloatingEffects from './components/FloatingEffects';
+import SendBlessings from './components/SendBlessings';
+
+function SectionDivider() {
+  return (
+    <div className="flex items-center justify-center space-x-4 my-2 opacity-85 py-4 bg-transparent w-full relative z-25">
+      <div className="h-[0.5px] w-24 bg-gradient-to-r from-transparent to-[#c5a880]/60"></div>
+      <span className="text-[#d4af37] text-lg font-serif">✦ 🌹 ✦</span>
+      <div className="h-[0.5px] w-24 bg-gradient-to-l from-transparent to-[#c5a880]/60"></div>
+    </div>
+  );
+}
 
 export default function App() {
   const [phase, setPhase] = useState("envelope"); // 'envelope', 'letter', 'hero', 'main'
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const rsvpRef = useRef(null);
+  const rsvpInView = useInView(rsvpRef, { once: true });
 
   // Pre-instantiate the Audio object on mount so it preloads and is ready for synchronous user interaction
   useEffect(() => {
@@ -119,11 +133,19 @@ export default function App() {
         <>
           <div className="w-full relative z-20 animate-fade-in-up">
             <MemoryLane />
+            <SectionDivider />
             <EventDetails />
-            <FinalCTA />
-            <Footer audioRef={audioRef} />
+            <SectionDivider />
+            
+            {/* Romantic falling petals isolated to RSVP and Footer sections, layered behind the cards */}
+            <div ref={rsvpRef} className="w-full relative overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f8e9eb] z-20">
+              {rsvpInView && <FloatingEffects zIndex="z-0" loop={false} count={140} fullWidth={true} interactive={true} />}
+              <FinalCTA />
+              <Footer audioRef={audioRef} />
+            </div>
           </div>
-          {/* Floating WhatsApp Contact Button */}
+
+          {/* Floating WhatsApp Contact Button (Bottom Right) */}
           <motion.a
             href="https://wa.me/919999999999?text=Hi!%20I%20have%20a%20question%20about%20the%20wedding..."
             target="_blank"

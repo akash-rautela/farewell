@@ -34,7 +34,7 @@ export default function Footer({ audioRef }) {
   };
 
   return (
-    <footer className="w-full py-8 border-t border-brand-primary/10 bg-brand-bg relative z-20 flex items-center justify-center px-10 text-brand-text/60 font-serif text-sm text-center">
+    <footer className="w-full py-8 border-t border-brand-primary/10 bg-transparent relative z-10 flex items-center justify-center px-10 text-brand-text/60 font-serif text-sm text-center">
       
       <div className="flex items-center space-x-2">
         <span>With Love & Blessings,</span>

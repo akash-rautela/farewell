@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import FloatingEffects from './FloatingEffects';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial, Sparkles, Center } from '@react-three/drei';
 import * as THREE from 'three';
@@ -104,53 +105,72 @@ export default function PhaseHero({ onClick, isInteractive }) {
         </Canvas>
       </div>
 
-      {/* Hero Foreground Text with subtle parallax mapping */}
+      {/* Falling Rose Petals & Golden Sparkles - Full width, layered behind the card */}
+      <FloatingEffects fullWidth={true} zIndex="z-0" />
+
+      {/* Hero Foreground Invitation Card with subtle parallax mapping */}
       <motion.div 
-        className="relative z-10 flex flex-col items-center pointer-events-none mt-10 px-4"
+        className="relative z-20 flex flex-col items-center justify-center pointer-events-none px-4 w-full"
         animate={{ x: mousePos.x, y: mousePos.y }}
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
       >
-        {/* Accent Script Line */}
-        <motion.span
-          className="font-script text-3xl sm:text-4xl text-brand-primary mb-2 text-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-        >
-          Together with their families
-        </motion.span>
-
-        <motion.h1 
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tight mb-4 text-center text-[#d4af37] drop-shadow-[0_2px_15px_rgba(217,116,134,0.15)] font-display"
-          initial={{ opacity: 0, scale: 0.9 }}
+        <motion.div
+          className="relative w-[92%] max-w-md bg-[#faf6f0]/90 backdrop-blur-md border border-[#c5a880]/30 rounded-[2.5rem] p-8 sm:p-12 shadow-[0_20px_50px_rgba(217,116,134,0.12)] flex flex-col items-center justify-center text-center overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          Aditya & Riya <span className="opacity-80">💍</span>
-        </motion.h1>
-        
-        <motion.h2 
-          className="text-xl sm:text-2xl md:text-3xl text-[#3c2f2f] font-semibold font-serif tracking-[0.2em] uppercase text-center drop-shadow-sm mt-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          Are Tying the Knot
-        </motion.h2>
+          {/* Decorative Inner Gold Border */}
+          <div className="absolute inset-4 border border-[#d4af37]/35 rounded-[2rem] pointer-events-none"></div>
+          
+          {/* Decorative corner motifs in gold/rose */}
+          <div className="absolute top-6 left-6 text-brand-primary/45 text-xs select-none pointer-events-none">✦</div>
+          <div className="absolute top-6 right-6 text-brand-primary/45 text-xs select-none pointer-events-none">✦</div>
+          <div className="absolute bottom-6 left-6 text-brand-primary/45 text-xs select-none pointer-events-none">✦</div>
+          <div className="absolute bottom-6 right-6 text-brand-primary/45 text-xs select-none pointer-events-none">✦</div>
 
-        <motion.p
-          className="text-lg sm:text-xl md:text-2xl text-[#3c2f2f]/80 font-medium tracking-[0.1em] mt-4 font-serif text-center drop-shadow-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          November 9, 2026
-        </motion.p>
+          {/* Accent Script Line */}
+          <span className="font-script text-3xl sm:text-4xl text-brand-primary mb-2">
+            Together with their families
+          </span>
+          
+          {/* Invitation Tagline */}
+          <span className="text-[10px] tracking-[0.25em] uppercase text-brand-text/50 font-display mb-3">
+            Invite You To Celebrate The Wedding Of
+          </span>
+
+          {/* Names */}
+          <h1 className="text-4xl sm:text-5xl font-display font-semibold text-[#d4af37] tracking-wide mb-3 select-text">
+            Aditya & Riya
+          </h1>
+          
+          {/* Rose Divider */}
+          <div className="flex items-center space-x-2 my-2 w-full justify-center">
+            <div className="h-[0.5px] w-8 bg-[#c5a880]/50"></div>
+            <span className="text-brand-primary text-sm">🌹</span>
+            <div className="h-[0.5px] w-8 bg-[#c5a880]/50"></div>
+          </div>
+
+          {/* Are Tying the Knot / Wedding Announcement */}
+          <h2 className="text-sm sm:text-base text-[#3c2f2f] font-semibold font-serif tracking-[0.2em] uppercase mt-2">
+            Are Tying The Knot
+          </h2>
+
+          {/* Date */}
+          <p className="text-lg sm:text-xl text-[#3c2f2f]/85 font-medium tracking-[0.1em] mt-3 font-serif">
+            November 9, 2026
+          </p>
+
+          {/* Venue Preview */}
+          <p className="text-xs text-brand-text/50 font-serif tracking-wider mt-2 max-w-[240px] leading-relaxed">
+            Royal Heritage Palace, Chanakyapuri, New Delhi
+          </p>
+        </motion.div>
       </motion.div>
 
       {isInteractive && (
         <motion.div 
-          className="absolute bottom-20 z-20 flex flex-col items-center pointer-events-none px-4 text-center"
+          className="absolute bottom-12 z-20 flex flex-col items-center pointer-events-none px-4 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2, duration: 1 }}
