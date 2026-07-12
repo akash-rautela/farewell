@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Confetti from 'react-confetti';
+import FloatingEffects from './FloatingEffects';
 
 export default function FinalCTA() {
   const [showConfetti, setShowConfetti] = useState(false);
@@ -59,6 +60,9 @@ export default function FinalCTA() {
 
   return (
     <section className="relative w-full py-32 flex items-center justify-center flex-col text-center z-10 bg-transparent px-4">
+      {/* Falling Rose Petals & Golden Sparkles - Settles as a horizontal flower border line */}
+      <FloatingEffects zIndex="z-0" loop={false} count={160} fullWidth={true} interactive={true} landYRange={[65, 67]} />
+      
       {showConfetti && (
         <div className="fixed inset-0 z-50 pointer-events-none">
           <Confetti 

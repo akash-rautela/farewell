@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 
 function FloatingParticle({ item, fullWidth, loop, interactive }) {
   const [hovered, setHovered] = useState(false);
-  const [fading, setFading] = useState(false);
 
   const handleHover = () => {
-    if (!interactive || fading) return;
+    if (!interactive || hovered) return;
     setHovered(true);
+    // Settle back to rest coordinate after 1.2 seconds so it can be nudged/swayed again
     setTimeout(() => {
-      setFading(true);
-    }, 200); // show a slight physical push offset before fading out
+      setHovered(false);
+    }, 1200);
   };
 
   return (
@@ -18,7 +18,6 @@ function FloatingParticle({ item, fullWidth, loop, interactive }) {
       className={`absolute ${interactive ? 'pointer-events-auto cursor-default' : 'pointer-events-none'}`}
       style={{
         left: `${item.x}%`,
-        top: `-5%`,
         width: item.size,
         height: item.isPetal ? item.size * 1.3 : item.size,
         backgroundColor: item.isPetal ? item.color : 'rgba(212, 175, 55, 0.25)',
@@ -28,21 +27,21 @@ function FloatingParticle({ item, fullWidth, loop, interactive }) {
         filter: 'blur-[0.2px]'
       }}
       animate={{
-        y: fading ? '115vh' : ['0vh', '115vh'],
+        // If looping, fall off-screen. If landing, settle at landY position near the bottom of the section.
+        top: loop ? ['-5%', '108%'] : ['-5%', `${item.landY}%`],
         x: [0, Math.sin(item.id) * (fullWidth ? 45 : 25), Math.sin(item.id + 2) * (fullWidth ? -35 : -20), 0],
         rotate: [0, 360 + Math.random() * 360],
         // Interactive wind push offsets
         translateX: hovered && interactive ? Math.sin(item.id) * 35 : 0,
         translateY: hovered && interactive ? -20 : 0,
-        scale: hovered && interactive ? 1.2 : 1,
-        opacity: fading && interactive ? 0 : 1
+        scale: hovered && interactive ? 1.25 : 1
       }}
       transition={{
-        y: {
+        top: {
           duration: item.duration,
           repeat: loop ? Infinity : 0,
           delay: item.delay,
-          ease: "linear"
+          ease: loop ? "linear" : "easeOut" // easeOut makes particles decelerate gently as they land on the floor
         },
         x: {
           duration: item.duration,
@@ -56,17 +55,17 @@ function FloatingParticle({ item, fullWidth, loop, interactive }) {
           delay: item.delay,
           ease: "linear"
         },
-        translateX: { type: "spring", stiffness: 100, damping: 12 },
-        translateY: { type: "spring", stiffness: 100, damping: 12 },
-        scale: { duration: 0.4 },
-        opacity: fading ? { duration: 0.6, ease: "easeOut" } : { duration: 0.2 }
+        // Spring physics to make the wind reaction bounce/sway organically
+        translateX: { type: "spring", stiffness: 80, damping: 10 },
+        translateY: { type: "spring", stiffness: 80, damping: 10 },
+        scale: { duration: 0.4 }
       }}
       onPointerOver={handleHover}
     />
   );
 }
 
-export default function FloatingEffects({ fullWidth = false, zIndex = "z-40", loop = true, count = 48, interactive = false }) {
+export default function FloatingEffects({ fullWidth = false, zIndex = "z-40", loop = true, count = 48, interactive = false, landYRange = [85, 97] }) {
   // Memoize elements to prevent re-randomizing coordinates on mouse movements
   const items = useMemo(() => {
     return Array.from({ length: count }).map((_, i) => {
@@ -81,17 +80,21 @@ export default function FloatingEffects({ fullWidth = false, zIndex = "z-40", lo
         startX = isLeft ? Math.random() * 15 : 85 + Math.random() * 15;
       }
 
+      // Settle/land at a coordinate near the bottom of the section wrapper
+      const landY = landYRange[0] + Math.random() * (landYRange[1] - landYRange[0]);
+
       return {
         id: i,
         x: startX,
+        landY,
         size: isPetal ? 10 + Math.random() * 12 : 8 + Math.random() * 8, // slightly larger gold bubbles
-        delay: Math.random() * 6, // tighter delays for a rich initial burst
-        duration: 9 + Math.random() * 8, // slightly faster fall duration for shower effect
+        delay: Math.random() * (loop ? 6 : 3), // tighter delays for a rich initial burst in RSVP section
+        duration: loop ? (9 + Math.random() * 8) : (5 + Math.random() * 5), // faster fall speed to settle quickly in RSVP
         color: isPetal ? 'rgba(217, 116, 134, 0.45)' : 'rgba(212, 175, 55, 0.5)',
         isPetal
       };
     });
-  }, [fullWidth, count]);
+  }, [fullWidth, count, loop, landYRange[0], landYRange[1]]);
 
   return (
     // Dynamic zIndex injection to coordinate layering stacks

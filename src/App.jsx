@@ -25,8 +25,6 @@ export default function App() {
   const [phase, setPhase] = useState("envelope"); // 'envelope', 'letter', 'hero', 'main'
   const audioRef = useRef(null);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const rsvpRef = useRef(null);
-  const rsvpInView = useInView(rsvpRef, { once: true });
 
   // Pre-instantiate the Audio object on mount so it preloads and is ready for synchronous user interaction
   useEffect(() => {
@@ -138,8 +136,7 @@ export default function App() {
             <SectionDivider />
             
             {/* Romantic falling petals isolated to RSVP and Footer sections, layered behind the cards */}
-            <div ref={rsvpRef} className="w-full relative overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f8e9eb] z-20">
-              {rsvpInView && <FloatingEffects zIndex="z-0" loop={false} count={140} fullWidth={true} interactive={true} />}
+            <div className="w-full relative overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f8e9eb] z-20">
               <FinalCTA />
               <Footer audioRef={audioRef} />
             </div>
