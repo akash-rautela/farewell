@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-bg: #1a0522; /* Deep dark purple-black */
-  --color-brand-primary: #ec4899; /* Vibrant Pink / Magenta */
-  --color-brand-secondary: #facc15; /* Neon Gold */
-  --color-brand-accent: #9333ea; /* Electric Purple */
-  --color-brand-text: #f8fafc;
+  --color-brand-bg: #faf6f0; /* Creamy Warm Off-white */
+  --color-brand-primary: #d97486; /* Elegant Dusty Rose / Blush Pink */
+  --color-brand-secondary: #d4af37; /* Luxury Gold */
+  --color-brand-accent: #c5a880; /* Elegant Champagne / Bronze */
+  --color-brand-text: #3c2f2f; /* Deep Espresso / Charcoal */
 }
 
 @layer base {
@@ -17,7 +17,12 @@
   
   body {
     @apply bg-brand-bg text-brand-text min-h-screen;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
+  }
+
+  /* Serif font for elegant wedding look */
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
   }
 
   ::-webkit-scrollbar {
@@ -27,7 +32,7 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-brand-primary/50;
+    @apply bg-brand-primary/40;
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -37,18 +42,20 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-brand-primary/20 shadow-[0_0_25px_rgba(236,72,153,0.15)];
+    @apply bg-white/75 backdrop-blur-md border border-brand-primary/15 shadow-[0_15px_35px_rgba(217,116,134,0.08)];
   }
   .neon-text-primary {
-    text-shadow: 0 0 12px rgba(236, 72, 153, 0.8), 0 0 24px rgba(236, 72, 153, 0.6);
+    @apply text-brand-primary;
+    text-shadow: 0 2px 10px rgba(217, 116, 134, 0.15);
   }
   .neon-text-secondary {
-    text-shadow: 0 0 12px rgba(250, 204, 21, 0.8), 0 0 24px rgba(250, 204, 21, 0.6);
+    @apply text-brand-secondary;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
   }
   .neon-border {
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4), inset 0 0 8px rgba(250, 204, 21, 0.2);
+    @apply border border-brand-primary/20 shadow-[0_4px_20px_rgba(217,116,134,0.05)];
   }
   .bg-radial-party {
-    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.2), rgba(236, 72, 153, 0.05), #1a0522 70%);
+    background: radial-gradient(circle at center, rgba(217, 116, 134, 0.15), rgba(212, 175, 55, 0.05), #faf6f0 75%);
   }
 }

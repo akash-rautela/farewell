@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { MeshDistortMaterial, Sparkles, Center } from '@react-three/drei';
 import * as THREE from 'three';
 
-function PartyHeart() {
+function WeddingHeart() {
   const meshRef = useRef();
   const [hovered, setHover] = useState(false);
   
@@ -24,44 +24,45 @@ function PartyHeart() {
     if (meshRef.current) {
       const time = clock.getElapsedTime();
       
-      const targetScale = hovered ? 0.3 : 0.22;
+      const targetScale = hovered ? 0.28 : 0.22;
       meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
       
-      const targetSpeed = hovered ? 2.5 : 1.0;
-      meshRef.current.rotation.y += 0.01 * targetSpeed;
-      meshRef.current.rotation.z = Math.sin(time * 2) * 0.05;
+      const targetSpeed = hovered ? 2.2 : 1.0;
+      meshRef.current.rotation.y += 0.015 * targetSpeed;
+      meshRef.current.rotation.z = Math.sin(time * 1.5) * 0.05;
     }
   });
 
   return (
     <group position={[0, -1, 0]}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 2]} intensity={4} color="#facc15" />
-      <spotLight position={[-4, -3, -2]} intensity={5} color="#ec4899" angle={1} penumbra={0.5} distance={20} />
-      <pointLight position={[0, 0, 0]} intensity={3} color="#9333ea" distance={10} />
+      {/* Warm and romantic lighting setup */}
+      <ambientLight intensity={1.2} />
+      <directionalLight position={[5, 5, 2]} intensity={3.5} color="#d4af37" />
+      <spotLight position={[-4, -3, -2]} intensity={4.5} color="#d97486" angle={1} penumbra={0.5} distance={20} />
+      <pointLight position={[0, 0, 0]} intensity={2.5} color="#c5a880" distance={10} />
       
-      <Sparkles count={150} scale={12} size={3.5} speed={0.8} opacity={0.8} color="#facc15" noise={0.4} />
-      <Sparkles count={100} scale={10} size={4} speed={0.6} opacity={0.6} color="#ec4899" noise={0.3} />
+      {/* Elegant gold and pink floating sparkles */}
+      <Sparkles count={120} scale={12} size={3.0} speed={0.6} opacity={0.7} color="#d4af37" noise={0.4} />
+      <Sparkles count={80} scale={10} size={3.5} speed={0.4} opacity={0.5} color="#d97486" noise={0.3} />
 
       <Center>
         <group rotation={[0, 0, Math.PI]}>
           <mesh 
             ref={meshRef}
-            scale={[0.22, 0.22, 0.22]} // initialize base scale safely
+            scale={[0.22, 0.22, 0.22]}
             onPointerOver={() => setHover(true)}
             onPointerOut={() => setHover(false)}
           >
             <extrudeGeometry args={[heartShape, { depth: 2, bevelEnabled: true, bevelSegments: 3, steps: 2, bevelSize: 1, bevelThickness: 1 }]} />
             <MeshDistortMaterial
-              color="#1a0522"
+              color="#fdf0f0"
               attach="material"
-              distort={hovered ? 0.4 : 0.2}
-              speed={hovered ? 3.0 : 1.2}
-              roughness={0.2}
-              metalness={0.8}
-              emissive="#6b21a8"
-              emissiveIntensity={hovered ? 0.8 : 0.4}
-              wireframe
+              distort={hovered ? 0.35 : 0.15}
+              speed={hovered ? 2.5 : 1.0}
+              roughness={0.15}
+              metalness={0.4}
+              emissive="#e8c5c8"
+              emissiveIntensity={hovered ? 1.5 : 0.8}
             />
           </mesh>
         </group>
@@ -76,8 +77,8 @@ export default function PhaseHero({ onClick, isInteractive }) {
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * -30,
-        y: (e.clientY / window.innerHeight - 0.5) * -30,
+        x: (e.clientX / window.innerWidth - 0.5) * -15,
+        y: (e.clientY / window.innerHeight - 0.5) * -15,
       });
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -93,13 +94,13 @@ export default function PhaseHero({ onClick, isInteractive }) {
       onClick={isInteractive ? onClick : undefined}
       style={{ cursor: isInteractive ? 'pointer' : 'default' }}
     >
-      {/* Deep party radial background */}
+      {/* Soft wedding radial background */}
       <div className="absolute inset-0 bg-radial-party z-0"></div>
 
-      {/* Hero Canvas holding the object. */}
+      {/* Hero Canvas holding the 3D Wedding Heart. */}
       <div className="absolute inset-0 z-0 opacity-95 pointer-events-auto">
         <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
-          <PartyHeart />
+          <WeddingHeart />
         </Canvas>
       </div>
 
@@ -110,22 +111,31 @@ export default function PhaseHero({ onClick, isInteractive }) {
         transition={{ type: "spring", stiffness: 75, damping: 20 }}
       >
         <motion.h1 
-          className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-4 text-center text-white drop-shadow-[0_0_25px_rgba(236,72,153,0.8)] uppercase"
+          className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-4 text-center text-brand-text drop-shadow-[0_2px_15px_rgba(217,116,134,0.15)] font-serif"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          Farewell '26 <span className="opacity-80">🔥</span>
+          Aditya & Riya <span className="opacity-80">💍</span>
         </motion.h1>
         
         <motion.h2 
-          className="text-xl sm:text-3xl md:text-5xl text-white font-extrabold tracking-[0.2em] drop-shadow-[0_4px_8px_rgba(0,0,0,0.9)] uppercase text-center"
+          className="text-xl sm:text-2xl md:text-3xl text-brand-secondary font-bold font-serif tracking-[0.2em] uppercase text-center drop-shadow-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          The SRMU Final Chapter
+          Are Tying the Knot
         </motion.h2>
+
+        <motion.p
+          className="text-lg sm:text-xl md:text-2xl text-brand-accent font-medium tracking-[0.1em] mt-4 font-serif text-center drop-shadow-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          November 9, 2026
+        </motion.p>
       </motion.div>
 
       {isInteractive && (
@@ -136,16 +146,16 @@ export default function PhaseHero({ onClick, isInteractive }) {
           transition={{ delay: 2, duration: 1 }}
         >
           <motion.div 
-            className="px-8 sm:px-10 py-4 rounded-full bg-white/10 backdrop-blur-lg border-2 border-white/80 text-white font-bold tracking-[0.1em] uppercase text-sm sm:text-base md:text-lg shadow-[0_0_30px_rgba(236,72,153,0.5)]"
-            animate={{ scale: [1, 1.05, 1], boxShadow: ["0 0 20px rgba(250,204,21,0.3)", "0 0 40px rgba(236,72,153,0.6)", "0 0 20px rgba(250,204,21,0.3)"] }}
+            className="px-8 sm:px-10 py-4 rounded-full bg-white/80 backdrop-blur-md border border-brand-primary/20 text-brand-primary font-bold tracking-[0.15em] uppercase text-sm sm:text-base shadow-[0_10px_25px_rgba(217,116,134,0.1)]"
+            animate={{ scale: [1, 1.04, 1], boxShadow: ["0 10px 20px rgba(217,116,134,0.05)", "0 10px 25px rgba(212,175,55,0.2)", "0 10px 20px rgba(217,116,134,0.05)"] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            Click here to enter the Party
+            Click to Enter Celebration
           </motion.div>
         </motion.div>
       )}
 
-      {/* Graduate mask at the bottom to blend smoothly into the next section */}
+      {/* Blend smoothly into the next section */}
       <div className="absolute -bottom-1 left-0 w-full h-48 bg-gradient-to-t from-brand-bg to-transparent z-10 pointer-events-none"></div>
     </motion.div>
   );
