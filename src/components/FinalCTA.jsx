@@ -136,7 +136,7 @@ export default function FinalCTA() {
             </div>
 
             {/* Guests Selector */}
-            {formData.attending === 'yes' && (
+            {/* {formData.attending === 'yes' && (
               <div className="flex flex-col space-y-2 animate-fade-in">
                 <label htmlFor="guests" className="text-brand-text/80 font-display font-bold text-sm">Number of Guests</label>
                 <select
@@ -152,7 +152,7 @@ export default function FinalCTA() {
                   <option value="4">4+ Guests</option>
                 </select>
               </div>
-            )}
+            )} */}
 
             {/* Message Input */}
             <div className="flex flex-col space-y-2">
